@@ -12,6 +12,9 @@ class Turtle {
     }
 }
 
+// forward(steps) method updates object's x & y coordinates based on steps and current facing 
+// Also stores all visited points on the way
+// Returns object itself
 Turtle.prototype.forward = function(steps) {
     
     switch (this.face) {
@@ -139,28 +142,12 @@ if (process.argv.length >= 3) {
         }
     }
 
-    // Check if options are passed to script
-    if (process.execArgv.length != 0) {
-        console.log(process.execArgv);
-        const fs = require("fs");
-        // Save turtle path drawing string in passed output file 
-        fs.writeFile(process.execArgv[0], turtleInstance.print(), err => {
-            if (err) {
-                console.log("Could not write file");
-                console.error(err);
-                return; // Skip rest of callback
-            }
-            console.log(`Drawing written to ${output}`);
-        });
-    }
-
     console.log(turtleInstance.print());
 
     // [STRETCH] Script testing 
 
     // $ node turtleGraphics.js f10-r-r-f10-l-f5-l-f10-r-f5-r-f10
     // $ node turtleGraphics.js t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5
-    // $ node --output=drawing.txt turtleGraphics.js f10-r-f10-r-f10-r-f10
 
 } else {
 
