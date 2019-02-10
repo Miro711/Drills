@@ -59,4 +59,13 @@ router.delete('/:id', (req, res) => {
         });
 });
 
+router.get('/:id/edit', (req, res) => {
+    knex('cohorts')
+        .where('id', req.params.id)
+        .first()
+        .then(cohort => {
+            res.render('cohorts/edit', { cohort: cohort });
+        });
+});
+
 module.exports = router;
