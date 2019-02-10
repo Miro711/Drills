@@ -5,7 +5,12 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "db:create": "createdb --echo knexpress_homework",
+		"db:drop": "dropdb --if-exists --echo knexpress_homework",
+		"db:migrate": "knex migrate:latest",
+		"db:rollback": "knex migrate:rollback",
+		"db:reset": "npm run db:drop && npm run db:create && npm run db:migrate"
   },
   "author": "Amir",
   "license": "ISC",
