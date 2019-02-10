@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+<div class="card">
+  <div class="card-header">
+    <div class="post-cards">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title"><%= cohort.name %></h5>
+                <p class="card-text"><%= cohort.members %></p>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <form method="GET" action="/cohorts/<%= cohort.id %>">
+    <div class="form-group">
+        <label for="method">Method</label><br>
+        <input type="radio" name="method" value="teamCount"> Team Count<br>
+        <input type="radio" name="method" value="perTeam"> Number Per Team<br>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity</label><br>
+        <input type="text" name="quantity" class="form-control">
+    </div>
+    <input type="submit" value="Assign Teams" class="btn btn-outline-success">
+    </form>
+    <% if (teamsArray.length >= 1) { %>
+        <div>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Members</th>
+            </tr>
+            <% for (let i = 0; i <= teamsArray.length-1; i += 1) { %>
+                <tr>
+                    <td> <%= i+1 %> </td>
+                    <td> <%= teamsArray[i].join(',') %> </td>
+                </tr>
+            <% } %>
+        </table>
+        </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

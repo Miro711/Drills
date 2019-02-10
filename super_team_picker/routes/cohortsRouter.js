@@ -24,4 +24,30 @@ router.post('/', (req, res) => {
         });
 });
 
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+	knex('cohorts')
+		.where('id', id)
+		.first()
+		.then(cohort => {
+            const method = req.query.method;
+            const quantity = parseInt(req.query.quantity);
+            const membersArray = cohort.members.split(',').sort(()=> 0.5-Math.random());
+            const numberOfMembers = membersArray.length;
+            const teamsArray = [];
+            if (method == 'perTeam') {
+                const numberOfTeams = Math.ceil(numberOfMembers/quantity);
+                for (let i = 0; i <= membersArray.length-1; i += quantity) {
+                    teamsArray.push(membersArray.slice(i,quantity+i));
+                }
+            } else if (method == 'teamCount') {
+                const membersPerTeam = Math.floor(numberOfMembers/quantity);
+                for (let i = 0; i <= membersArray.length-1; i += membersPerTeam) {
+                    teamsArray.push(membersArray.slice(i,i+membersPerTeam));
+                }
+            }
+			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray });
+		});
+});
+
 module.exports = router;
