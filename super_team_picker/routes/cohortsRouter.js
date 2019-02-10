@@ -1,4 +1,5 @@
 const express = require('express');
+const knex = require('../db/client');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -11,6 +12,13 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
     const newCohort = req.body;
+    knex('cohorts')
+        .insert(newCohort)
+        .returning('*')
+        .then(cohorts => {
+            const cohort = cohorts[0];
+            res.redirect(`/cohorts/${cohort.id}`);
+        });
 });
 
 module.exports = router;
