@@ -5,4 +5,8 @@ router.get('/', (req, res) => {
     res.send('GET /cohorts is working');
 });
 
+router.get('/new', (req, res) => {
+    res.render('cohorts/new');
+});
+
 module.exports = router;
