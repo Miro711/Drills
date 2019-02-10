@@ -3,7 +3,12 @@ const logger = require('morgan');
 
 const app = express();
 
+app.set('view engine', 'ejs');
 app.use(logger('dev'));
+
+app.get('/', (req, res) => {
+    res.render('welcome');
+});
 
 const PORT = 5000;
 const HOST = 'localhost';
