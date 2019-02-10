@@ -9,4 +9,8 @@ router.get('/new', (req, res) => {
     res.render('cohorts/new');
 });
 
+router.post('/', (req, res) => {
+    const newCohort = req.body;
+});
+
 module.exports = router;
