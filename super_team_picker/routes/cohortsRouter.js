@@ -68,4 +68,18 @@ router.get('/:id/edit', (req, res) => {
         });
 });
 
+router.patch('/:id', (req, res) => {
+    const updatedCohort = {
+        logoUrl: req.body.logoUrl,
+        name: req.body.name,
+        members: req.body.members
+	};
+    knex('cohorts')
+		.where('id', req.params.id)
+		.update(updatedCohort)
+		.then(() => {
+			res.redirect(`/cohorts/${req.params.id}`);
+		});
+});
+
 module.exports = router;
