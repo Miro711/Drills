@@ -7,6 +7,10 @@
             <div class="card-body">
                 <h5 class="card-title"><%= cohort.name %></h5>
                 <p class="card-text"><%= cohort.members %></p>
+                <form method="POST" action="/cohorts/<%= cohort.id %>">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete" class="btn btn-outline-danger">
+                </form>
             </div>
         </div>
     </div>
