@@ -3,7 +3,10 @@ const knex = require('../db/client');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send('GET /cohorts is working');
+    knex('cohorts')
+        .then(cohorts => {
+            res.render('cohorts/index', { cohorts: cohorts });
+        });
 });
 
 router.get('/new', (req, res) => {
