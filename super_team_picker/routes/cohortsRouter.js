@@ -36,14 +36,31 @@ router.get('/:id', (req, res) => {
             const numberOfMembers = membersArray.length;
             const teamsArray = [];
             if (method == 'perTeam') {
-                const numberOfTeams = Math.ceil(numberOfMembers/quantity);
-                for (let i = 0; i <= membersArray.length-1; i += quantity) {
-                    teamsArray.push(membersArray.slice(i,quantity+i));
+                let team = 0;
+                while ((numberOfMembers - (team * quantity)) >= quantity * 2) {
+                    console.log(team)
+                    teamsArray.push(membersArray.splice(0, quantity));
+                    team += 1;
+                }
+                if (membersArray.length == quantity) {
+                    teamsArray.push(membersArray.splice(0, quantity));
+                } else if (membersArray.length % 2 == 0) {
+                    const temp = membersArray.length / 2;
+                    teamsArray.push(membersArray.splice(0, temp));
+                    teamsArray.push(membersArray.splice(0, temp));
+                } else {
+                    teamsArray.push(membersArray.slice(0, quantity));
+                    teamsArray.push(membersArray.slice(0, quantity - 1));
                 }
             } else if (method == 'teamCount') {
                 const membersPerTeam = Math.floor(numberOfMembers/quantity);
-                for (let i = 0; i <= membersArray.length-1; i += membersPerTeam) {
-                    teamsArray.push(membersArray.slice(i,i+membersPerTeam));
+                let team = 1;
+                while (team <= quantity) {
+                    teamsArray.push(membersArray.splice(0,membersPerTeam));
+                    team += 1;
+                }
+                for (let i = 0; i <= membersArray.length-1; i += 1) {
+                    teamsArray[i].push(membersArray[i]);
                 }
             }
 			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray });
