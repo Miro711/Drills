@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 		.then(cohort => {
             const method = req.query.method;
             const quantity = parseInt(req.query.quantity);
-            const membersArray = cohort.members.split(',').sort(()=> 0.5-Math.random());
+            const membersArray = cohort.members.split(',').sort((a, b)=> 0.5-Math.random());
             teamsArray = teamRandomizer(method, quantity, membersArray);
 			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray, formValues:req.query});
 		});
