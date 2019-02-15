@@ -3,9 +3,11 @@
 <div class="post-cards">
     <% for (let cohort of cohorts) { %>
         <div class="card mb-4">
-            <img class="small-image" src="<%= cohort.logoUrl %>" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title"><%= cohort.name %></h5>
+                <h5 class="card-title">
+                    <img src="<%= cohort.logoUrl %>" alt="Card image cap" height="100" width="auto" class="rounded-circle" >
+                    <%= cohort.name %>
+                </h5>
                 <p class="card-text"><%= cohort.members %></p>
                 <a href="/cohorts/<%= cohort.id %>" class="btn btn-primary">Show cohort</a>
             </div>
