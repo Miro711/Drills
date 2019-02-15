@@ -1,6 +1,5 @@
 <%- include('../partials/header') %>
-    <h1>New Cohort</h1>
-    <form method="POST" action="/cohorts">
+    <form method="POST" action="/cohorts" class="mx-3 my-2 p-1 clearfix">
     <div class="form-group">
         <label for="logoUrl">Logo Url</label><br>
         <input type="url" name="logoUrl" placeholder="e.g. https://www.example.com/some.png" class="form-control"> 
@@ -13,6 +12,6 @@
         <label for="members">Members</label><br>
         <textarea name="members" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark" class="form-control"></textarea> 
     </div>  
-    <input type="submit" value="Submit" class="btn btn-outline-success">
+    <input type="submit" value="Submit" class="btn btn-outline-primary float-right">
     </form>
 <%- include('../partials/footer') %>
