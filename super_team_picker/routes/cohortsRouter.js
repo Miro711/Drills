@@ -63,7 +63,7 @@ router.get('/:id', (req, res) => {
                     teamsArray[i].push(membersArray[i]);
                 }
             }
-			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray });
+			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray, formValues:req.query});
 		});
 });
 
