@@ -33,36 +33,7 @@ router.get('/:id', (req, res) => {
             const method = req.query.method;
             const quantity = parseInt(req.query.quantity);
             const membersArray = cohort.members.split(',').sort(()=> 0.5-Math.random());
-            const numberOfMembers = membersArray.length;
-            const teamsArray = [];
-            if (method == 'perTeam') {
-                let team = 0;
-                while ((numberOfMembers - (team * quantity)) >= quantity * 2) {
-                    console.log(team)
-                    teamsArray.push(membersArray.splice(0, quantity));
-                    team += 1;
-                }
-                if (membersArray.length == quantity) {
-                    teamsArray.push(membersArray.splice(0, quantity));
-                } else if (membersArray.length % 2 == 0) {
-                    const temp = membersArray.length / 2;
-                    teamsArray.push(membersArray.splice(0, temp));
-                    teamsArray.push(membersArray.splice(0, temp));
-                } else {
-                    teamsArray.push(membersArray.slice(0, quantity));
-                    teamsArray.push(membersArray.slice(0, quantity - 1));
-                }
-            } else if (method == 'teamCount') {
-                const membersPerTeam = Math.floor(numberOfMembers/quantity);
-                let team = 1;
-                while (team <= quantity) {
-                    teamsArray.push(membersArray.splice(0,membersPerTeam));
-                    team += 1;
-                }
-                for (let i = 0; i <= membersArray.length-1; i += 1) {
-                    teamsArray[i].push(membersArray[i]);
-                }
-            }
+            teamsArray = teamRandomizer(method, quantity, membersArray);
 			res.render('cohorts/show', { cohort: cohort, teamsArray: teamsArray, formValues:req.query});
 		});
 });
@@ -98,5 +69,39 @@ router.patch('/:id', (req, res) => {
 			res.redirect(`/cohorts/${req.params.id}`);
 		});
 });
+
+function teamRandomizer(method, quantity, membersArray) {
+    const numberOfMembers = membersArray.length;
+    const teamsArray = [];
+    if (method == 'perTeam') {
+        let team = 0;
+        while ((numberOfMembers - (team * quantity)) >= quantity * 2) {
+            console.log(team)
+            teamsArray.push(membersArray.splice(0, quantity));
+            team += 1;
+        }
+        if (membersArray.length == quantity) {
+            teamsArray.push(membersArray.splice(0, quantity));
+        } else if (membersArray.length % 2 == 0) {
+            const temp = membersArray.length / 2;
+            teamsArray.push(membersArray.splice(0, temp));
+            teamsArray.push(membersArray.splice(0, temp));
+        } else {
+            teamsArray.push(membersArray.slice(0, quantity));
+            teamsArray.push(membersArray.slice(0, quantity - 1));
+        }
+    } else if (method == 'teamCount') {
+        const membersPerTeam = Math.floor(numberOfMembers / quantity);
+        let team = 1;
+        while (team <= quantity) {
+            teamsArray.push(membersArray.splice(0, membersPerTeam));
+            team += 1;
+        }
+        for (let i = 0; i <= membersArray.length - 1; i += 1) {
+            teamsArray[i].push(membersArray[i]);
+        }
+    }
+    return teamsArray;
+}
 
 module.exports = router;
