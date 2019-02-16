@@ -87,8 +87,8 @@ function teamRandomizer(method, quantity, membersArray) {
             teamsArray.push(membersArray.splice(0, temp));
             teamsArray.push(membersArray.splice(0, temp));
         } else {
-            teamsArray.push(membersArray.slice(0, quantity));
-            teamsArray.push(membersArray.slice(0, quantity - 1));
+            teamsArray.push(membersArray.splice(0, quantity));
+            teamsArray.push(membersArray.splice(0, quantity - 1));
         }
     } else if (method == 'teamCount') {
         const membersPerTeam = Math.floor(numberOfMembers / quantity);
