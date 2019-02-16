@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h1 class="mx-3">Edit Cohort</h1>
+<form method="POST" action="/cohorts/<%= cohort.id %>" class="mx-3 my-2 p-1 clearfix">
+    <input type="hidden" name="_method" value="PATCH">
+    <div class="form-group">
+        <label for="logoUrl">Logo Url</label><br>
+        <input type="url" name="logoUrl" value="<%= cohort.logoUrl%>" class="form-control"> 
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" value="<%= cohort.name%>" class="form-control"> 
+    </div> 
+    <div class="form-group">
+        <label for="members">Members</label><br>
+        <textarea name="members" class="form-control"><%= cohort.members%></textarea> 
+    </div>  
+    <input type="submit" class="btn btn-outline-primary float-right" value="Update Cohort">
+</form>
+
+<%- include('../partials/footer') %>
