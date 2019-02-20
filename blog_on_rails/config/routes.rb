@@ -16,4 +16,12 @@ Rails.application.routes.draw do
   # 5 - DELETE post_path(<id>)
   delete("/posts/:id", to: "posts#destroy")
 
+  # 6 - GET edit_post_path(<id>)
+  get("/posts/:id/edit", to: "posts#edit", as: :edit_post)
+
+  # 7 - PATCH post_path(<id>)
+  patch("/posts/:id", to: "posts#update")
+
+  #post("/questions/:id/comments", to: "comments#create")
+
 end
