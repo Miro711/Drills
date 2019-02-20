@@ -15,4 +15,14 @@ class PostsController < ApplicationController
         end
     end
 
+    def show
+        @post = Post.find(params[:id])
+        render :show
+    end
+        
+    def index
+        @posts = Post.all.order(created_at: :desc)
+        render :index
+    end
+
 end
