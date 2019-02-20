@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   # 2 - POST posts_path
   post("/posts", to: "posts#create", as: :posts)
 
-  # 3 - GET post_path 
+  # 3 - GET post_path(<id>)
   get("/posts/:id", to: "posts#show", as: :post)
 
   # 4 - GET posts_path
   get("/posts", to: "posts#index")
+
+  # 5 - DELETE post_path(<id>)
+  delete("/posts/:id", to: "posts#destroy")
 
 end
