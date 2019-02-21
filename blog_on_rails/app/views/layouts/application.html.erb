@@ -10,6 +10,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <%= link_to("Home", posts_path) %>
+        <%= link_to("New Post", new_post_path) %>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
