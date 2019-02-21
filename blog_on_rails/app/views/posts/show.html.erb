@@ -16,3 +16,52 @@
     <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" } %>
   </small>
 </div>
+
+<section>
+  <h1>Comments</h1>
+
+  <%= form_with(model: [@post, @new_comment], local: true) do |f| %>
+    <% if @new_comment.errors.present? %>
+      <p class="form-errors">
+        <%= @new_comment.errors.full_messages.join(", ") %>
+      </p>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.text_area(
+        :body,
+        cols: 50,
+        rows: 5,
+        placeholder: "What's on your mind?",
+        class: "form-control"
+      ) %>
+    </div>
+    <%= f.submit "Submit" %>
+  <% end %>
+
+  <ul class="comment-list">
+    <% @comments.each do |comment| %>
+      <li>
+        <p>
+          <%= comment.body %> <br>
+          <small>
+            Commented <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          •
+          <small>
+            <%=
+              link_to(
+                "Delete",
+                post_comment_path(@post, comment),
+                method: :delete,
+                data: {
+                  confirm: "Are you sure?"
+                }
+              )
+            %>
+          </small>    
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</section>
