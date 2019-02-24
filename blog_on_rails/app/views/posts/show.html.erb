@@ -6,7 +6,7 @@
     <small>
       Posted <%= time_ago_in_words(@post.updated_at) %> ago
     </small> 
-    <div class= "mb-3">
+    <div class= "mb-3 mt-2">
         <%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-outline-primary" %>
         <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary" %>
     </div>
@@ -37,7 +37,7 @@
 
   <ul class="comment-list">
     <% @comments.each do |comment| %>
-      <li class="mb-1">
+      <li class="mb-2">
         <p class="card-text">
           <%= comment.body %> <br>
           <small>
