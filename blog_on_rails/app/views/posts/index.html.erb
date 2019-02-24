@@ -1,9 +1,15 @@
-<h1> All Posts </h1>
 
+<div class="container-fluid">
+<div class="row">
   <% @posts.each do |post| %>
-  <div>
-    <h2><%= link_to post.title, post_path(post.id) %> </h2>
-    <p> <%= post.body %> </p>
-    <hr>
+  <div class="col-sm-12 col-md-6 col-lg-4 py-2">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="card-title"><%= link_to post.title, post_path(post.id) %> </h2>
+        <p class="card-text"> <%= post.body %> </p>
+      </div>
+    </div>
   </div>
   <% end %>
+</div>
+</div>

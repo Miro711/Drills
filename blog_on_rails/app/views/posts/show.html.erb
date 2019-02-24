@@ -1,24 +1,20 @@
-<h1><%= @post.title %></h1>
 
-<p><%= @post.body %></p>
-
-<div>
-  <small>
-    Posted <%= time_ago_in_words(@post.updated_at) %> ago
-  </small> 
-</div>
-
-<div>
+<div class="container-fluid">
+<div class="card border-0">
+    <h2 class="card-title"><%= @post.title %></h2>
+    <p class="card-text"><%= @post.body %></p>
     <small>
-    <%= link_to "Edit", edit_post_path(@post.id) %>
-  </small>
-  <small>
-    <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" } %>
-  </small>
+      Posted <%= time_ago_in_words(@post.updated_at) %> ago
+    </small> 
+    <div class= "mb-3">
+        <%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-outline-primary" %>
+        <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary" %>
+    </div>
+</div>
 </div>
 
-<section>
-  <h1>Comments</h1>
+<section class="container-fluid">
+  <h4>Comment</h4>
 
   <%= form_with(model: [@post, @new_comment], local: true) do |f| %>
     <% if @new_comment.errors.present? %>
@@ -36,13 +32,13 @@
         class: "form-control"
       ) %>
     </div>
-    <%= f.submit "Submit" %>
+    <%= f.submit "Submit", :class => "btn btn-outline-primary mb-3" %>
   <% end %>
 
   <ul class="comment-list">
     <% @comments.each do |comment| %>
-      <li>
-        <p>
+      <li class="mb-1">
+        <p class="card-text">
           <%= comment.body %> <br>
           <small>
             Commented <%= time_ago_in_words(comment.created_at) %> ago
