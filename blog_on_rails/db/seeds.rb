@@ -6,17 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Comment.destroy_all
 Post.destroy_all
 
 50.times do
     created_at = Faker::Date.backward(365*5) # Date is class inside Faker module
-    Post.create(
+    p = Post.create(
         title: Faker::Company.catch_phrase, #Hacker.say_something_smart
         body: Faker::Lorem.paragraph,
         created_at: created_at,
         updated_at: created_at
         )
+
+    if p.valid?
+        p.comments = rand(0..15).times.map do
+            Comment.new(body: Faker::GreekPhilosophers.quote)
+        end
+    end
+
 end
 
-Post = Post.all
-puts Cowsay.say("Generated #{Post.count} posts", :frogs)
+posts = Post.all
+comments = Comment.all
+
+puts Cowsay.say("Generated #{posts.count} posts", :frogs)
+puts Cowsay.say("Generated #{comments.count} comments", :frogs)
