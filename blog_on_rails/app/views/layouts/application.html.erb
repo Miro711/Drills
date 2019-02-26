@@ -24,6 +24,19 @@
             <li class="nav-item">
               <%= link_to("New Post", new_post_path, class: "nav-link text-primary") %>
             </li>
+            <% if user_signed_in? %>
+              <span class="navbar-text mr-2 px-2">Hello <%= current_user.name %></span>
+              <li class="nav-item">
+                <%= link_to "Sign Out", session_path, method: :delete, 
+                    data: {confirm: "Are you sure you want to sign out?"}, 
+                    class:"btn btn-dark" %>
+              </li>
+            <% else %>
+              <li class="nav-item px-2">
+                <%= link_to "Sign In", new_session_path, class:"btn btn-dark" %>
+                <%= link_to "Sign Up", new_user_path, class:"btn btn-dark" %>
+              </li>
+            <% end %>
           </ul>
         </div>
     </nav>
