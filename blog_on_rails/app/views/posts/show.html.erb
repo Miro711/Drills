@@ -4,7 +4,7 @@
     <h2 class="card-title"><%= @post.title %></h2>
     <p class="card-text"><%= @post.body %></p>
     <small>
-      Posted by <%= @post.user || 'DELETED' %> 
+      Posted by <%= @post.user&.full_name || 'DELETED' %> 
       <%= time_ago_in_words(@post.updated_at) %> ago
     </small> 
     <div class= "mb-3 mt-2">
@@ -42,7 +42,7 @@
         <p class="card-text">
           <%= comment.body %> <br>
           <small>
-            Commented by <%= comment.user || 'DELETED' %> 
+            Commented by <%= comment.user&.full_name || 'DELETED' %> 
             <%= time_ago_in_words(comment.created_at) %> ago
           </small>
           •
