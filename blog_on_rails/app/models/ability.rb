@@ -30,6 +30,9 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     user ||= User.new
+    if user.is_admin?
+      can :manage, :all
+    end
     alias_action :create, :read, :update, :destroy, to: :crud
     can :crud, Post, user_id: user.id
     can :crud, Comment do |comment|
