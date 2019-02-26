@@ -8,8 +8,12 @@
       <%= time_ago_in_words(@post.updated_at) %> ago
     </small> 
     <div class= "mb-3 mt-2">
+      <% if can?(:update, @post) %>
         <%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-outline-primary" %>
+      <% end %>
+      <% if can?(:destroy, @post) %>
         <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary" %>
+      <% end %>
     </div>
 </div>
 </div>
@@ -45,6 +49,7 @@
             Commented by <%= comment.user&.full_name || 'DELETED' %> 
             <%= time_ago_in_words(comment.created_at) %> ago
           </small>
+          <% if can? :destroy, comment %>
           •
           <small>
             <%=
@@ -57,7 +62,8 @@
                 }
               )
             %>
-          </small>    
+          </small> 
+          <% end %>   
         </p>
       </li>
     <% end %>

@@ -2,6 +2,8 @@ class PostsController < ApplicationController
     
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :authorize_user!, only: [:destroy, :edit, :update]
+    skip_before_action :verify_authenticity_token
 
     def new
         @post = Post.new
@@ -50,6 +52,10 @@ class PostsController < ApplicationController
 
     def find_post
         @post = Post.find(params[:id])
+    end
+
+    def authorize_user!
+        redirect_to root_path, alert: 'access denied' unless can? :crud, @post
     end
 
 end
