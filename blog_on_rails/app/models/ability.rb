@@ -38,5 +38,6 @@ class Ability
     can :crud, Comment do |comment|
       comment.user == user || comment.post.user == user
     end
+    can :update, User, user_id: user.id
   end
 end

@@ -25,7 +25,9 @@
               <%= link_to("New Post", new_post_path, class: "nav-link text-primary") %>
             </li>
             <% if user_signed_in? %>
-              <span class="navbar-text mr-2 px-2">Hello <%= current_user.name %></span>
+              <span class="navbar-text mr-2 px-2">
+                <%= link_to("#{current_user.name}", edit_user_path(current_user.id)) %>
+              </span>
               <li class="nav-item">
                 <%= link_to "Sign Out", session_path, method: :delete, 
                     data: {confirm: "Are you sure you want to sign out?"}, 
