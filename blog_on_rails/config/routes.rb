@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :users, only: [ :new, :create, :edit, :update]
+  get("/users/:id/change_password", to: "users#change_password", as: :change_password)
+  post("/users/:id/change_password", to: "users#patch_password", as: :patch_password)
+
   resource :session, only: [ :new, :create, :destroy]
+  
   get("/", to: "posts#index", as: :root)
   resources :posts do
     resources :comments, only: [:create, :destroy]
