@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     before_action :find_user, only: [:edit, :update, :change_password]
-    before_action :authenticate_user!, only: [:edit, :update]
+    before_action :authenticate_user!, only: [:edit, :update, :change_password, :patch_password]
 
     def new
         @user = User.new
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
           flash[:notice] = "Password Changed Successfully"
           redirect_to root_path
         else
-          flash[:notice] = "New passwords not matching"
+          flash[:alert] = "New passwords not matching"
           render :change_password
         end
       else
