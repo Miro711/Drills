@@ -33,10 +33,10 @@ class UsersController < ApplicationController
 
     def patch_password
       #render json: params
-      user = User.find(params[:id])
+      #user = User.find(params[:id])
       pass_params = params.permit(:current_password, :new_password, :new_password_confirmation)
-      if user&.authenticate(pass_params["current_password"])
-        if user.update(password: pass_params["new_password"], password_confirmation: pass_params["new_password_confirmation"])
+      if current_user&.authenticate(pass_params["current_password"])
+        if current_user.update(password: pass_params["new_password"], password_confirmation: pass_params["new_password_confirmation"])
           flash[:notice] = "Password Changed Successfully"
           redirect_to root_path
         else
