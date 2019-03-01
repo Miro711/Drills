@@ -40,11 +40,11 @@ class UsersController < ApplicationController
           flash[:notice] = "Password Changed Successfully"
           redirect_to root_path
         else
-          flash[:alert] = "New passwords not matching"
+          flash[:alert] = "New password does not match its confirmation!"
           render :change_password
         end
       else
-        flash[:alert] = "Wrong password"
+        flash[:alert] = "Current password is wrong!"
         render :change_password
       end
       

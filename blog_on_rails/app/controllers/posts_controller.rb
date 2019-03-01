@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     end
 
     def authorize_user!
-        redirect_to root_path, alert: 'access denied' unless can? :crud, @post
+        redirect_to root_path, alert: 'Access Denied' unless can? :crud, @post
     end
 
 end
