@@ -1,0 +1,71 @@
+
+<div class="container-fluid">
+<div class="card border-0">
+    <h2 class="card-title"><%= @post.title %></h2>
+    <p class="card-text"><%= @post.body %></p>
+    <small>
+      Posted by <%= @post.user&.full_name || 'DELETED' %> 
+      <%= time_ago_in_words(@post.updated_at) %> ago
+    </small> 
+    <div class= "mb-3 mt-2">
+      <% if can?(:update, @post) %>
+        <%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-outline-primary" %>
+      <% end %>
+      <% if can?(:destroy, @post) %>
+        <%= link_to "Delete", post_path(@post.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary" %>
+      <% end %>
+    </div>
+</div>
+</div>
+
+<section class="container-fluid">
+  <h4>Comment</h4>
+
+  <%= form_with(model: [@post, @new_comment], local: true) do |f| %>
+    <% if @new_comment.errors.present? %>
+      <p class="form-errors">
+        <%= @new_comment.errors.full_messages.join(", ") %>
+      </p>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.text_area(
+        :body,
+        cols: 50,
+        rows: 5,
+        placeholder: "What's on your mind?",
+        class: "form-control"
+      ) %>
+    </div>
+    <%= f.submit "Submit", :class => "btn btn-outline-primary mb-3" %>
+  <% end %>
+
+  <ul class="comment-list">
+    <% @comments.each do |comment| %>
+      <li class="mb-2">
+        <p class="card-text">
+          <%= comment.body %> <br>
+          <small>
+            Commented by <%= comment.user&.full_name || 'DELETED' %> 
+            <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          <% if can? :destroy, comment %>
+          •
+          <small>
+            <%=
+              link_to(
+                "Delete",
+                post_comment_path(@post, comment),
+                method: :delete,
+                data: {
+                  confirm: "Are you sure?"
+                }
+              )
+            %>
+          </small> 
+          <% end %>   
+        </p>
+      </li>
+    <% end %>
+  </ul>
+</section>
