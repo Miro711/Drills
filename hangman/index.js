@@ -41,6 +41,8 @@ $(document).ready(function () {
                 guessedWord[char] = guessedLetter;
                 console.log(guessedWord);
                 if (guessedWord.join("") == word) {
+                    const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
+                    winSound().play();
                     setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
                 }
             }
