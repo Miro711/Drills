@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    var word = 'podiatrist';
+    const arrayOfWords = ['podiatrist', 'Dawn'];
+    var word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
     var wrongGuesses = 0;
     var guessedWord = [];
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -16,6 +17,7 @@ $(document).ready(function () {
                 if (guessedWord.join("") == word) {
                     const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
                     winSound().play();
+                    reset();
                     setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
                 }
             }
@@ -27,9 +29,20 @@ $(document).ready(function () {
             if (wrongGuesses == 6) {
                 const loseSound = () => new Audio('sounds/Bum.mp3');
                 loseSound().play();
+                reset();
                 setTimeout(function(){ alert("Better luck next time..."); }, 100);
             }
         }
+    }
+
+    function reset() {
+        const arrayOfWords = ['podiatrist', 'Dawn'];
+        word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
+        wrongGuesses = 0;
+        guessedWord = [];
+        $('div#lives img').attr("src", `images/0.jpg`);
+        $('#alphabet li#letter').removeClass('highlighted');
+        $('li.guess').html("_")
     }
 
     myButtons = document.getElementById('buttons');
@@ -66,8 +79,8 @@ $(document).ready(function () {
         const keyCode = event.which; // same as const { keyCode } = event;
         console.log(keyCode);
         const key = String.fromCharCode(keyCode);
-        hangman(key);
         $('#alphabet li#letter').eq(keyCode-97).addClass('highlighted');
+        hangman(key);
     });
 
 });
