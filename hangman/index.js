@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    const arrayOfWords = ['podiatrist', 'Dawn'];
+    var arrayOfWords = ['podiatrist', 'dollarama','treadmill','coffee'];
     var word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
     var wrongGuesses = 0;
     var guessedWord = [];
@@ -8,17 +8,17 @@ $(document).ready(function () {
         'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
         'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     ];
+    reset();
     function hangman(guessedLetter) {
         for (let char = 0; char <= word.length - 1; char++) {
             if (word[char] == guessedLetter) {
                 $('li.guess').eq(char).html(`${guessedLetter.toUpperCase()}`);
                 guessedWord[char] = guessedLetter;
-                console.log(guessedWord);
                 if (guessedWord.join("") == word) {
                     const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
                     winSound().play();
-                    reset();
                     setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
+                    reset();
                 }
             }
         }
@@ -29,20 +29,31 @@ $(document).ready(function () {
             if (wrongGuesses == 6) {
                 const loseSound = () => new Audio('sounds/Bum.mp3');
                 loseSound().play();
-                reset();
                 setTimeout(function(){ alert("Better luck next time..."); }, 100);
+                reset();
             }
         }
     }
 
     function reset() {
-        const arrayOfWords = ['podiatrist', 'Dawn'];
         word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
+        console.log(word)
         wrongGuesses = 0;
         guessedWord = [];
-        $('div#lives img').attr("src", `images/0.jpg`);
+
         $('#alphabet li#letter').removeClass('highlighted');
-        $('li.guess').html("_")
+
+        $('li.guess').remove();
+
+        $('div#lives img').attr("src", `images/0.jpg`);
+        
+        correct = document.getElementById('my-word');
+        for (let i = 0; i < word.length; i++) {
+            guess = document.createElement('li');
+            guess.setAttribute('class','guess');
+            guess.innerHTML = "_";
+            correct.appendChild(guess);
+        }
     }
 
     myButtons = document.getElementById('buttons');
@@ -55,18 +66,6 @@ $(document).ready(function () {
         list.innerHTML = alphabet[i];
         myButtons.appendChild(letters);
         letters.appendChild(list);
-    }
-
-    wordHolder = document.getElementById('word');
-    correct = document.createElement('ul');
-
-    for (let i = 0; i < word.length; i++) {
-        correct.id = 'my-word';
-        guess = document.createElement('li');
-        guess.setAttribute('class', 'guess');
-        guess.innerHTML = "_";
-        wordHolder.appendChild(correct);
-        correct.appendChild(guess);
     }
 
     $('#alphabet li#letter').on('click', function (event) {
