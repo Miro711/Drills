@@ -1,42 +1,53 @@
-#alphabet li {
-    display: inline-block;
-    list-style: none;
-    margin: 5px;
-    padding: 30px 30px 30px 30px;
-    text-align: center;
-    background: #fff;
-    color: black;
-    border: solid 1px black;
+#buttons{
+  margin-bottom: 35px;
 }
 
-.highlighted{
-    background-color: red !important;
-    color: white !important;
-    font-weight: bold;
+ul#alphabet{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#alphabet li {
+  display: inline-block;
+  list-style: none;
+  margin: 5px;
+  border: solid 1px black;
+  padding: 30px 30px 30px 30px;
+  background: #fff;
+  text-align: center;
+  color: black;
+  width: 40px;
+}
+
+.highlighted {
+  background-color: red !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+#word{
+  margin-bottom: 35px;
 }
 
 #my-word {
-    margin: 0;
-    display: block;
-    padding: 0;
-    display:block;
-    text-align: center;
-  }
-  
-  #my-word li {
-    position: relative;
-    list-style: none;
-    margin: 4px;
-    display: inline-block;
-    padding: 0 10px;
-    font-size:1.6em;
-    /* border-bottom: 1px solid black; */
-    /* position: relative; */
-  }
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 20%;
-  }
+#my-word li {
+  display: inline-block;
+  position: relative;
+  list-style: none;
+  margin: 4px;
+  padding: 0 10px;
+  font-size: 1.6em;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
