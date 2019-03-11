@@ -10,19 +10,7 @@ $(document).ready(function () {
     ];
     reset();
     function hangman(guessedLetter) {
-        for (let char = 0; char <= word.length - 1; char++) {
-            if (word[char] == guessedLetter) {
-                $('li.guess').eq(char).html(`${guessedLetter.toUpperCase()}`);
-                guessedWord[char] = guessedLetter;
-                if (guessedWord.join("") == word) {
-                    const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
-                    winSound().play();
-                    setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
-                    reset();
-                }
-            }
-        }
-
+        
         if (word.indexOf(guessedLetter) == -1) {
             wrongGuesses += 1;
             $('div#lives img').attr("src", `images/${wrongGuesses}.jpg`);
@@ -32,7 +20,21 @@ $(document).ready(function () {
                 setTimeout(function(){ alert("Better luck next time..."); }, 100);
                 reset();
             }
+        } else {
+            for (let char = 0; char <= word.length - 1; char++) {
+                if (word[char] == guessedLetter) {
+                    $('li.guess').eq(char).html(`${guessedLetter.toUpperCase()}`);
+                    guessedWord[char] = guessedLetter;
+                }
+            }
+            if (guessedWord.join("") == word) {
+                const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
+                winSound().play();
+                setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
+                reset();
+            }
         }
+
     }
 
     function reset() {
@@ -76,7 +78,6 @@ $(document).ready(function () {
 
     $(document).on('keypress', function(event) {
         const keyCode = event.which; // same as const { keyCode } = event;
-        console.log(keyCode);
         const key = String.fromCharCode(keyCode);
         $('#alphabet li#letter').eq(keyCode-97).addClass('highlighted');
         hangman(key);
