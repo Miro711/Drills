@@ -17,7 +17,7 @@ $(document).ready(function () {
             if (wrongGuesses == 6) {
                 const loseSound = () => new Audio('sounds/Bum.mp3');
                 loseSound().play();
-                setTimeout(function(){ alert("Better luck next time..."); }, 100);
+                alert("Better luck next time...");
                 reset();
             }
         } else {
@@ -30,7 +30,7 @@ $(document).ready(function () {
             if (guessedWord.join("") == word) {
                 const winSound = () => new Audio('sounds/Yo Adrian I did it.mp3');
                 winSound().play();
-                setTimeout(function(){ alert("Congratulations! You win!"); }, 100);
+                alert("Congratulations! You win!");
                 reset();
             }
         }
