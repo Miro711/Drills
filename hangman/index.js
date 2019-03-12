@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    var arrayOfWords = ['podiatrist', 'dollarama','treadmill','coffee'];
-    var word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
-    var wrongGuesses = 0;
-    var guessedWord = [];
+    const arrayOfWords = ['podiatrist', 'dollarama','treadmill','coffee'];
+    let word = arrayOfWords[Math.floor(Math.random()*arrayOfWords.length)];
+    let wrongGuesses = 0;
+    let guessedWord = [];
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
         'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
         'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
